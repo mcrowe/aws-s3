@@ -1,5 +1,5 @@
 #:stopdoc:
-module AWS
+module AWSS3
   module S3
     class Base
       class Response < String  
@@ -138,7 +138,7 @@ module AWS
       end
   
       def initialize(start)
-        @container     = AWS::S3
+        @container     = AWSS3::S3
         @current_class = start
       end
   

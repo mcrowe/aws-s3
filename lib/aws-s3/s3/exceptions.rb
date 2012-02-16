@@ -1,7 +1,7 @@
-module AWS
+module AWSS3
   module S3
     
-    # Abstract super class of all AWS::S3 exceptions
+    # Abstract super class of all AWSS3::S3 exceptions
     class S3Exception < StandardError
     end
     

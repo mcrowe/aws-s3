@@ -1,6 +1,6 @@
-module AWS
+module AWSS3
   module S3    
-    # All authentication is taken care of for you by the AWS::S3 library. None the less, some details of the two types
+    # All authentication is taken care of for you by the AWSS3::S3 library. None the less, some details of the two types
     # of authentication and when they are used may be of interest to some.
     #
     # === Header based authentication
@@ -8,7 +8,7 @@ module AWS
     # Header based authentication is achieved by setting a special <tt>Authorization</tt> header whose value 
     # is formatted like so:
     #
-    #   "AWS #{access_key_id}:#{encoded_canonical}"
+    #   "AWSS3 #{access_key_id}:#{encoded_canonical}"
     #
     # The <tt>access_key_id</tt> is the public key that is assigned by Amazon for a given account which you use when
     # establishing your initial connection. The <tt>encoded_canonical</tt> is computed according to rules layed out 
@@ -25,7 +25,7 @@ module AWS
     #
     # When accessing a restricted object from the browser, you can authenticate via the query string, by setting the following parameters:
     #
-    #   "AWSAccessKeyId=#{access_key_id}&Expires=#{expires}&Signature=#{encoded_canonical}"
+    #   "AWSS3AccessKeyId=#{access_key_id}&Expires=#{expires}&Signature=#{encoded_canonical}"
     # 
     # The QueryString class is responsible for generating the appropriate parameters for authentication via the
     # query string.
@@ -91,11 +91,11 @@ module AWS
       class Header < Signature #:nodoc:
         def initialize(*args)
           super
-          self << "AWS #{access_key_id}:#{encoded_canonical}"
+          self << "AWSS3 #{access_key_id}:#{encoded_canonical}"
         end
       end
       
-      # Provides query string authentication by computing the three authorization parameters: AWSAccessKeyId, Expires and Signature.
+      # Provides query string authentication by computing the three authorization parameters: AWSS3AccessKeyId, Expires and Signature.
       # More details about the various authentication schemes can be found in the docs for its containing module, Authentication.
       class QueryString < Signature #:nodoc:
         constant :DEFAULT_EXPIRY, 300 # 5 minutes
@@ -124,7 +124,7 @@ module AWS
           
           # Keep in alphabetical order
           def build
-            "AWSAccessKeyId=#{access_key_id}&Expires=#{expires}&Signature=#{encoded_canonical}"
+            "AWSS3AccessKeyId=#{access_key_id}&Expires=#{expires}&Signature=#{encoded_canonical}"
           end
       end
       

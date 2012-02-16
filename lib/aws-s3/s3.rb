@@ -28,25 +28,25 @@ require 's3/connection'
 require 's3/authentication'
 require 's3/response'
 
-AWS::S3::Base.class_eval do
-  include AWS::S3::Connection::Management
+AWSS3::S3::Base.class_eval do
+  include AWSS3::S3::Connection::Management
 end
 
-AWS::S3::Bucket.class_eval do
-  include AWS::S3::Logging::Management
-  include AWS::S3::ACL::Bucket
+AWSS3::S3::Bucket.class_eval do
+  include AWSS3::S3::Logging::Management
+  include AWSS3::S3::ACL::Bucket
 end
 
-AWS::S3::S3Object.class_eval do
-  include AWS::S3::ACL::S3Object
-  include AWS::S3::BitTorrent
+AWSS3::S3::S3Object.class_eval do
+  include AWSS3::S3::ACL::S3Object
+  include AWSS3::S3::BitTorrent
 end
 
 require_library_or_gem 'xmlsimple', 'xml-simple' unless defined? XmlSimple
 # If libxml is installed, we use the FasterXmlSimple library, that provides most of the functionality of XmlSimple
 # except it uses the xml/libxml library for xml parsing (rather than REXML). If libxml isn't installed, we just fall back on
 # XmlSimple.
-AWS::S3::Parsing.parser =
+AWSS3::S3::Parsing.parser =
   begin
     require_library_or_gem 'xml/libxml'
     # Older version of libxml aren't stable (bus error when requesting attributes that don't exist) so we

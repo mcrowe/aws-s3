@@ -1,4 +1,4 @@
-module AWS
+module AWSS3
   module S3
     class FakeResponse
       attr_reader :code, :body, :headers

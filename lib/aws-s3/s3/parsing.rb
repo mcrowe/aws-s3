@@ -1,5 +1,5 @@
 #:stopdoc:
-module AWS
+module AWSS3
   module S3
     module Parsing
       class << self

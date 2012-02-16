@@ -1,4 +1,4 @@
-module AWS
+module AWSS3
   module S3
     module VERSION #:nodoc:
       MAJOR    = '0'

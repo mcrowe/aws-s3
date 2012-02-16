@@ -1,6 +1,6 @@
-module AWS
+module AWSS3
   module S3
-    # Anything you do that makes a request to S3 could result in an error. If it does, the AWS::S3 library will raise an exception 
+    # Anything you do that makes a request to S3 could result in an error. If it does, the AWSS3::S3 library will raise an exception 
     # specific to the error. All exception that are raised as a result of a request returning an error response inherit from the 
     # ResponseError exception. So should you choose to rescue any such exception, you can simple rescue ResponseError. 
     # 
@@ -17,7 +17,7 @@ module AWS
     # things like the HTTP response code:
     # 
     #   error
-    #   # => #<AWS::S3::BucketNotEmpty The bucket you tried to delete is not empty>
+    #   # => #<AWSS3::S3::BucketNotEmpty The bucket you tried to delete is not empty>
     #   error.message
     #   # => "The bucket you tried to delete is not empty"
     #   error.response.code
@@ -30,7 +30,7 @@ module AWS
       def initialize(error, response = nil)
         @error     = error
         @response  = response
-        @container = AWS::S3
+        @container = AWSS3::S3
         find_or_create_exception!
       end
       

@@ -1,4 +1,4 @@
-module AWS
+module AWSS3
   module S3
     # Buckets are containers for objects (the files you store on S3). To create a new bucket you just specify its name.
     # 
@@ -12,7 +12,7 @@ module AWS
     # Assuming the name you chose isn't already taken, your new bucket will now appear in the bucket list:
     # 
     #   Service.buckets
-    #   # => [#<AWS::S3::Bucket @attributes={"name"=>"jukebox"}>]
+    #   # => [#<AWSS3::S3::Bucket @attributes={"name"=>"jukebox"}>]
     # 
     # Once you have succesfully created a bucket you can you can fetch it by name using Bucket.find.
     #
@@ -40,12 +40,12 @@ module AWS
     # You'll see your file has been added to it:
     # 
     #   music_bucket.objects
-    #   # => [#<AWS::S3::S3Object '/jukebox/black-flowers.mp3'>]
+    #   # => [#<AWSS3::S3::S3Object '/jukebox/black-flowers.mp3'>]
     # 
     # You can treat your bucket like a hash and access objects by name:
     # 
     #   jukebox['black-flowers.mp3']
-    #   # => #<AWS::S3::S3Object '/jukebox/black-flowers.mp3'>
+    #   # => #<AWSS3::S3::S3Object '/jukebox/black-flowers.mp3'>
     # 
     # In the event that you want to delete a bucket, you can use Bucket.delete.
     #
@@ -120,9 +120,9 @@ module AWS
         # * <tt>:prefix</tt> - Restricts the response to only contain results that begin with the specified prefix.
         #
         #     Bucket.objects('jukebox')
-        #     # => [<AWS::S3::S3Object '/jazz/miles.mp3'>, <AWS::S3::S3Object '/jazz/dolphy.mp3'>, <AWS::S3::S3Object '/classical/malher.mp3'>]
+        #     # => [<AWSS3::S3::S3Object '/jazz/miles.mp3'>, <AWSS3::S3::S3Object '/jazz/dolphy.mp3'>, <AWSS3::S3::S3Object '/classical/malher.mp3'>]
         #     Bucket.objects('jukebox', :prefix => 'classical')
-        #     # => [<AWS::S3::S3Object '/classical/malher.mp3'>]
+        #     # => [<AWSS3::S3::S3Object '/classical/malher.mp3'>]
         #
         # * <tt>:marker</tt> - Marker specifies where in the result set to resume listing. It restricts the response 
         #   to only contain results that occur alphabetically _after_ the value of marker. To retrieve the next set of results, 
@@ -130,17 +130,17 @@ module AWS
         # 
         #     # Skip 'mahler'
         #     Bucket.objects('jukebox', :marker => 'mb')
-        #     # => [<AWS::S3::S3Object '/jazz/miles.mp3'>]
+        #     # => [<AWSS3::S3::S3Object '/jazz/miles.mp3'>]
         #
         # === Examples
         #
         #   # Return no more than 2 objects whose key's are listed alphabetically after the letter 'm'.
         #   Bucket.objects('jukebox', :marker => 'm', :max_keys => 2)
-        #   # => [<AWS::S3::S3Object '/jazz/miles.mp3'>, <AWS::S3::S3Object '/classical/malher.mp3'>]
+        #   # => [<AWSS3::S3::S3Object '/jazz/miles.mp3'>, <AWSS3::S3::S3Object '/classical/malher.mp3'>]
         #
         #   # Return no more than 2 objects whose key's are listed alphabetically after the letter 'm' and have the 'jazz' prefix.
         #   Bucket.objects('jukebox', :marker => 'm', :max_keys => 2, :prefix => 'jazz')
-        #   # => [<AWS::S3::S3Object '/jazz/miles.mp3'>]
+        #   # => [<AWSS3::S3::S3Object '/jazz/miles.mp3'>]
         def objects(name = nil, options = {})
           find(name, options).object_cache
         end
@@ -163,7 +163,7 @@ module AWS
           Base.delete(name).success?
         end
         
-        # List all your buckets. This is a convenient wrapper around AWS::S3::Service.buckets.
+        # List all your buckets. This is a convenient wrapper around AWSS3::S3::Service.buckets.
         def list(reload = false)
           Service.buckets(reload)
         end
@@ -196,10 +196,10 @@ module AWS
       # specified key.
       #
       #   bucket.objects
-      #   => [#<AWS::S3::S3Object '/marcel_molina/beluga_baby.jpg'>,
-      #       #<AWS::S3::S3Object '/marcel_molina/tongue_overload.jpg'>]
+      #   => [#<AWSS3::S3::S3Object '/marcel_molina/beluga_baby.jpg'>,
+      #       #<AWSS3::S3::S3Object '/marcel_molina/tongue_overload.jpg'>]
       #   bucket['beluga_baby.jpg']
-      #   => #<AWS::S3::S3Object '/marcel_molina/beluga_baby.jpg'>
+      #   => #<AWSS3::S3::S3Object '/marcel_molina/beluga_baby.jpg'>
       def [](object_key)
         detect {|file| file.key == object_key.to_s}
       end

@@ -1,4 +1,4 @@
-module AWS
+module AWSS3
   module S3
     # S3Objects represent the data you store on S3. They have a key (their name) and a value (their data). All objects belong to a
     # bucket.

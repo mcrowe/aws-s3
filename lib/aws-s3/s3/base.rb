@@ -1,5 +1,5 @@
-module AWS #:nodoc:
-  # AWS::S3 is a Ruby library for Amazon's Simple Storage Service's REST API (http://aws.amazon.com/s3).
+module AWSS3 #:nodoc:
+  # AWSS3::S3 is a Ruby library for Amazon's Simple Storage Service's REST API (http://aws.amazon.com/s3).
   # Full documentation of the currently supported API can be found at http://docs.amazonwebservices.com/AmazonS3/2006-03-01.
   # 
   # == Getting started
@@ -10,14 +10,14 @@ module AWS #:nodoc:
   #   irb(main):001:0> require 'aws/s3'
   #   # => true
   # 
-  # The AWS::S3 library ships with an interactive shell called <tt>s3sh</tt>. From within it, you have access to all the operations the library exposes from the command line.
+  # The AWSS3::S3 library ships with an interactive shell called <tt>s3sh</tt>. From within it, you have access to all the operations the library exposes from the command line.
   # 
   #   % s3sh
   #   >> Version
   # 
   # Before you can do anything, you must establish a connection using Base.establish_connection!.  A basic connection would look something like this:
   # 
-  #   AWS::S3::Base.establish_connection!(
+  #   AWSS3::S3::Base.establish_connection!(
   #     :access_key_id     => 'abc', 
   #     :secret_access_key => '123'
   #   )
@@ -39,17 +39,17 @@ module AWS #:nodoc:
   #     source "$HOME/.amazon_keys";
   #   fi
   # 
-  # See more connection details at AWS::S3::Connection::Management::ClassMethods.
+  # See more connection details at AWSS3::S3::Connection::Management::ClassMethods.
   module S3
     constant :DEFAULT_HOST, 's3.amazonaws.com'
     
-    # AWS::S3::Base is the abstract super class of all classes who make requests against S3, such as the built in
+    # AWSS3::S3::Base is the abstract super class of all classes who make requests against S3, such as the built in
     # Service, Bucket and S3Object classes. It provides methods for making requests, inferring or setting response classes,
     # processing request options, and accessing attributes from S3's response data.
     #
     # Establishing a connection with the Base class is the entry point to using the library:
     #
-    #   AWS::S3::Base.establish_connection!(:access_key_id => '...', :secret_access_key => '...')
+    #   AWSS3::S3::Base.establish_connection!(:access_key_id => '...', :secret_access_key => '...')
     #
     # The <tt>:access_key_id</tt> and <tt>:secret_access_key</tt> are the two required connection options. More 
     # details can be found in the docs for Connection::Management::ClassMethods.
@@ -110,7 +110,7 @@ module AWS #:nodoc:
         # If you plan on always using a specific bucket for certain files, you can skip always having to specify the bucket by creating 
         # a subclass of Bucket or S3Object and telling it what bucket to use:
         # 
-        #   class JukeBoxSong < AWS::S3::S3Object
+        #   class JukeBoxSong < AWSS3::S3::S3Object
         #     set_current_bucket_to 'jukebox'
         #   end
         # 
@@ -131,7 +131,7 @@ module AWS #:nodoc:
         # 
         #   other_song = JukeBoxSong.find('baby-please-come-home.mp3')
         def set_current_bucket_to(name)
-          raise ArgumentError, "`#{__method__}' must be called on a subclass of #{self.name}" if self == AWS::S3::Base
+          raise ArgumentError, "`#{__method__}' must be called on a subclass of #{self.name}" if self == AWSS3::S3::Base
           instance_eval(<<-EVAL)
             def current_bucket
               '#{name}'

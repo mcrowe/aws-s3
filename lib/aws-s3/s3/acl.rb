@@ -30,8 +30,8 @@ module AWS
     # 
     #   policy = S3Object.acl('kiss.jpg', 'marcel')
     #   pp policy.grants
-    #   [#<AWS::S3::ACL::Grant FULL_CONTROL to noradio>,
-    #    #<AWS::S3::ACL::Grant READ to AllUsers Group>]
+    #   [#<AWSS3::S3::ACL::Grant FULL_CONTROL to noradio>,
+    #    #<AWSS3::S3::ACL::Grant READ to AllUsers Group>]
     # 
     # Policies are made up of one or more grants which grant a specific permission to some grantee. Here we see the default FULL_CONTROL grant 
     # to the owner of this object. There is also READ permission granted to the Allusers Group, which means anyone has read access for the object.
@@ -42,13 +42,13 @@ module AWS
     # First we'll create a new grant object:
     # 
     #   grant = ACL::Grant.new
-    #   # => #<AWS::S3::ACL::Grant (permission) to (grantee)>
+    #   # => #<AWSS3::S3::ACL::Grant (permission) to (grantee)>
     #   grant.permission = 'READ_ACP'
     # 
     # Now we need to indicate who this grant is for. In other words, who the grantee is:
     # 
     #   grantee = ACL::Grantee.new
-    #   # => #<AWS::S3::ACL::Grantee (xsi not set yet)>
+    #   # => #<AWSS3::S3::ACL::Grantee (xsi not set yet)>
     # 
     # There are three ways to specify a grantee: 1) by their internal amazon id, such as the one returned with an object's Owner, 
     # 2) by their Amazon account email address or 3) by specifying a group. As of this writing you can not create custom groups, but 
@@ -61,15 +61,15 @@ module AWS
     # 
     #   grant.grantee = grantee
     #   grant
-    #   # => #<AWS::S3::ACL::Grant READ_ACP to AllUsers Group>
+    #   # => #<AWSS3::S3::ACL::Grant READ_ACP to AllUsers Group>
     # 
     # Are grant has all the information we need. Now that it's ready, we'll add it on to the object's access control policy's list of grants:
     # 
     #   policy.grants << grant
     #   pp policy.grants
-    #   [#<AWS::S3::ACL::Grant FULL_CONTROL to noradio>,
-    #    #<AWS::S3::ACL::Grant READ to AllUsers Group>,
-    #    #<AWS::S3::ACL::Grant READ_ACP to AllUsers Group>]
+    #   [#<AWSS3::S3::ACL::Grant FULL_CONTROL to noradio>,
+    #    #<AWSS3::S3::ACL::Grant READ to AllUsers Group>,
+    #    #<AWSS3::S3::ACL::Grant READ_ACP to AllUsers Group>]
     # 
     # Now that the policy has the new grant, we reuse the <tt>acl</tt> method to persist the policy change:
     # 
@@ -78,9 +78,9 @@ module AWS
     # If we fetch the object's policy again, we see that the grant has been added:
     # 
     #   pp S3Object.acl('kiss.jpg', 'marcel').grants
-    #   [#<AWS::S3::ACL::Grant FULL_CONTROL to noradio>,
-    #    #<AWS::S3::ACL::Grant READ to AllUsers Group>,
-    #    #<AWS::S3::ACL::Grant READ_ACP to AllUsers Group>]
+    #   [#<AWSS3::S3::ACL::Grant FULL_CONTROL to noradio>,
+    #    #<AWSS3::S3::ACL::Grant READ to AllUsers Group>,
+    #    #<AWSS3::S3::ACL::Grant READ_ACP to AllUsers Group>]
     # 
     # If we were to access this object's acl url from a browser: 
     # 
@@ -205,19 +205,19 @@ module AWS
       # When creating a new grant to add to a policy, you need only set its permission and then associate with a Grantee.
       #
       #   grant = ACL::Grant.new
-      #   => #<AWS::S3::ACL::Grant (permission) to (grantee)>
+      #   => #<AWSS3::S3::ACL::Grant (permission) to (grantee)>
       #
       # Here we see that neither the permission nor the grantee have been set. Let's make this grant provide the READ permission.
       #
       #   grant.permission = 'READ'
       #   grant
-      #   => #<AWS::S3::ACL::Grant READ to (grantee)>
+      #   => #<AWSS3::S3::ACL::Grant READ to (grantee)>
       #
       # Now let's assume we have a grantee to the AllUsers group already set up. Just associate that grantee with our grant. 
       #
       #   grant.grantee = all_users_group_grantee
       #   grant
-      #   => #<AWS::S3::ACL::Grant READ to AllUsers Group>
+      #   => #<AWSS3::S3::ACL::Grant READ to AllUsers Group>
       #
       # And now are grant is complete. It provides READ permission to the AllUsers group, effectively making this object publicly readable
       # without any authorization.
@@ -239,7 +239,7 @@ module AWS
           # Returns stock grants with name <tt>type</tt>.
           #
           #   public_read_grant = ACL::Grant.grant :public_read
-          #   => #<AWS::S3::ACL::Grant READ to AllUsers Group>
+          #   => #<AWSS3::S3::ACL::Grant READ to AllUsers Group>
           #
           # Valid stock grant types are:
           #
@@ -302,7 +302,7 @@ module AWS
         #
         #   grant.permission = 'READ'
         #   grant
-        #   => #<AWS::S3::ACL::Grant READ to (grantee)>
+        #   => #<AWSS3::S3::ACL::Grant READ to (grantee)>
         #
         # If the specified permisison level is not valid, an <tt>InvalidAccessControlLevel</tt> exception will be raised.
         def permission=(permission_level)

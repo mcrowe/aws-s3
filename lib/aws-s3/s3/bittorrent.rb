@@ -1,4 +1,4 @@
-module AWS
+module AWSS3
   module S3
     # Objects on S3 can be distributed via the BitTorrent file sharing protocol. 
     #

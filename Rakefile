@@ -21,7 +21,7 @@ end
 namespace :doc do
   Rake::RDocTask.new do |rdoc|  
     rdoc.rdoc_dir = 'doc'  
-    rdoc.title    = "AWS::S3 -- Support for Amazon S3's REST api"  
+    rdoc.title    = "AWSS3::S3 -- Support for Amazon S3's REST api"  
     rdoc.options << '--line-numbers' << '--inline-source'
     rdoc.rdoc_files.include('README')
     rdoc.rdoc_files.include('COPYING')
@@ -59,7 +59,7 @@ end
 namespace :dist do  
   spec = Gem::Specification.new do |s|
     s.name              = 'aws-s3'
-    s.version           = Gem::Version.new(AWS::S3::Version)
+    s.version           = Gem::Version.new(AWSS3::S3::Version)
     s.summary           = "Client library for Amazon's Simple Storage Service's REST API"
     s.description       = s.summary
     s.email             = 'marcel@vernix.org'
@@ -75,7 +75,7 @@ namespace :dist do
     s.add_dependency 'xml-simple'
     s.add_dependency 'builder'
     s.add_dependency 'mime-types'
-    s.rdoc_options  = ['--title', "AWS::S3 -- Support for Amazon S3's REST api",
+    s.rdoc_options  = ['--title', "AWSS3::S3 -- Support for Amazon S3's REST api",
                        '--main',  'README',
                        '--line-numbers', '--inline-source']
   end

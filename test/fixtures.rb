@@ -1,6 +1,6 @@
 require 'yaml'
 
-module AWS
+module AWSS3
   module S3
     # When this file is loaded, for each fixture file, a module is created within the Fixtures module
     # with the same name as the fixture file. For each fixture in that fixture file, a singleton method is 

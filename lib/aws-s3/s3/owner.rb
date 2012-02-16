@@ -1,4 +1,4 @@
-module AWS
+module AWSS3
   module S3
     # Entities in S3 have an associated owner (the person who created them). The owner is a canonical representation of an 
     # entity in the S3 system. It has an <tt>id</tt> and a <tt>display_name</tt>. 
