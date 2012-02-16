@@ -1,4 +1,4 @@
-module AWS
+module AWSS3
   module S3
     class Connection #:nodoc:
       class << self
